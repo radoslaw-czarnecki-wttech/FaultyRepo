@@ -1,10 +1,11 @@
-function compareValues(a, b) {
-  // BAD: Use '===' for comparison to avoid type coercion
-  if (a == b) {
-    console.log('Values are equal');
-  } else {
-    console.log('Values are not equal');
-  }
-}
+const express = require('express');
+const app = express();
 
-compareValues('5', 5);  // This will log 'Values are equal' because '==' allows type coercion
+app.get('/', function(req, res) {
+  let userName = req.query.userName;
+
+  // BAD: Directly using user input without any validation or sanitization.
+  res.send('Hello ' + userName);
+});
+
+app.listen(3000);
