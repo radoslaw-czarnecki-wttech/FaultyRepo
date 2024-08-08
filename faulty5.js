@@ -1,11 +1,10 @@
-const express = require('express');
-const app = express();
+const crypto = require('crypto');
 
-app.get('/', function(req, res) {
-  let userName = req.query.userName;
+function hashPassword(password) {
+  // BAD: Using MD5 hash algorithm which is considered insecure
+  const hash = crypto.createHash('md5');
+  hash.update(password);
+  return hash.digest('hex');
+}
 
-  // BAD: Directly using user input without any validation or sanitization.
-  res.send('Hello ' + userName);
-});
-
-app.listen(3000);
+hashPassword('mySecurePassword');
